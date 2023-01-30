@@ -1,0 +1,9 @@
+<odoo>
+    <data>        
+	<record id="module_category_master_reports" model="ir.module.category">
+            <field name="name">Master Reports</field>
+            <field name="description">Master Reports</field>
+            <field name="sequence">60</field>
+        </record>
+    </data>
+</odoo>

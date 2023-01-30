@@ -1,0 +1,7 @@
+<odoo>
+	<menuitem id="menu_master_reports1" name="Master Report"  web_icon="master_laporan,static/description/icon.png"/>
+	<menuitem id="menu_cashflow_reports1" name="Cashflow"  parent="menu_master_reports1" sequence="10"/>/>
+	<menuitem id="menu_sales_ete" name="Sales End to End"  parent="menu_master_reports1" sequence="20"/>/>
+	<menuitem id="menu_purchase_ats" name="Purchase"  parent="menu_master_reports1" sequence="30"/>/>
+	<menuitem id="menu_seting_reports1" name="Seting"  parent="menu_master_reports1" sequence="90"/>/>
+</odoo>

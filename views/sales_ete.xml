@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record model="ir.ui.view" id="tbl_report_sales_ete_form">
+        <field name="name">tbl_report_sales_ete.form</field>
+        <field name="model">tbl_report_sales_ete</field>
+        <field name="arch" type="xml">
+            <form string="Teknisi">
+                <header>
+                  <button name="act_get_so" string="Get SO" type="object" class="oe_highlight"/>
+                	<button name="act_get_data" string="Get Data" type="object" class="oe_highlight"/>
+                  <button name="print_xls_report" string="Print XLS" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+
+                 <group>
+                    <group>
+                      <field name="tgl_awal"/>
+            	      
+		     </group>
+		     <group>
+                <field name="tgl_akhir"/>
+                <field name="data" filename="name"/>
+                     </group>
+	         </group>
+
+		 <field name="detail">
+                      <tree string="Detail Action" create="false" edit="false">
+	                   <field name="name"/>
+                     <field name="segmen"/>
+		               <field name="warehouse_id"/>
+        			  <field name="tipe_barang"/>
+        			  <field name="scheduled_date"/>
+        			  <field name="date_done"/>
+                       <field name="team_id"/>
+                       <field name="user_id"/>
+                      <field name="partner_id"/>
+                      <field name="date_order"/>
+                      <field name="confirmation_date"/>
+                      <field name="categ_id"/>
+                       <!-- <field name="barcode"/> -->
+                       <field name="order_qty"/>
+                      <field name="uom_id"/>
+                      <field name="state"/>
+                      <field name="partner_ids"/>
+                      <!-- <field name="location_dest_id"/> -->
+                      <field name="tipe_cust"/>
+                       <field name="provinsi"/>
+                       <field name="kabupaten_kota"/>
+                      <field name="kecamatan"/>
+                      <field name="mobile"/>
+                      <field name="payment_term_id"/>
+                       <field name="pricelist_id"/>
+                       <field name="incoterm_id"/>
+                      <field name="currency_id"/>
+                      <field name="qty_delivered"/>
+                      <field name="open_qty"/>
+                       <field name="do_number"/>
+                       <field name="location_id"/>
+                      <field name="product_uom_qty"/>
+                      <field name="product_uom"/>
+                      <field name="date_dones"/>
+                       <field name="plat_id"/>
+                       <field name="driver_id"/>
+                      <field name="plat_idso"/>
+                      <field name="driver_idso"/>
+                      <field name="price_unit"/>
+                       <field name="amount_total"/>
+                       <field name="number"/>
+                      <field name="product_id"/>
+                      <field name="date_invoice"/>
+                      <field name="date_due"/>
+                      <field name="price_unitinv"/>
+                      <field name="amount_totalinv"/>
+                      <field name="amount_totaltax"/>
+		             </tree>
+	         </field>
+                    <field name="detail2" invisible="1">
+                      <tree string="Detail Action" editable="bottom">
+                        <field name="so_line_id"/>
+                        <field name="name"/>
+                        <field name="order_qty"/>
+                        <field name="uom_id"/>
+                        <field name="price_unit"/>
+                        <field name="amount_total"/>
+                        <field name="product_id"/>
+                      </tree>
+                    </field>
+                  <field name="detail3" invisible="1">
+                      <tree string="Detail Action" editable="bottom">
+                     <field name="name"/>
+                       <field name="order_qty"/>
+                      <field name="uom_id"/>
+                      <field name="location_dest_id"/>
+                       <field name="provinsi"/>
+                       <field name="kabupaten_kota"/>
+                      <field name="kecamatan"/>
+                      <field name="qty_delivered"/>
+                      <field name="open_qty"/>
+                       <field name="do_number"/>
+                      <field name="product_uom_qty"/>
+                      <field name="product_uom"/>
+                      <field name="price_unit"/>
+                       <field name="amount_total"/>
+                       <field name="number"/>
+                      <field name="product_id"/>
+                      <field name="price_unitinv"/>
+                      <field name="amount_totalinv"/>
+                      <field name="amount_totaltax"/>
+                 </tree>
+           </field>
+	      </sheet>
+
+	    </form>
+	  </field>
+	</record>
+
+
+     <record model="ir.ui.view" id="tbl_report_sales_ete_tree">
+        <field name="name">tbl_report_sales_ete.tree</field>
+        <field name="model">tbl_report_sales_ete</field>
+        <field name="arch" type="xml">
+            <tree string="Accounting" >
+                <field name="tgl_awal"/>
+                <field name="tgl_akhir"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="action_sales_ete">
+        <field name="name">Sales End to End Proses</field> 
+        <field name="res_model">tbl_report_sales_ete</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem  name="Sales End to End Proses" id="sales_ete" action="action_sales_ete" parent="menu_sales_ete" sequence="10" />
+
+        <record model="ir.ui.view" id="tbl_report_sales_ete_detail_pivot">
+            <field name="name">tbl_report_sales_ete_detail.pivot</field>
+            <field name="model">tbl_report_sales_ete_detail</field>
+            <field name="arch" type="xml">
+                <pivot string="Sales Orders">
+                    <!-- <field name="date_order" type="row"/>
+                    <field name="amount_total" type="measure"/> -->
+                </pivot>
+            </field>
+        </record>
+
+     <record model="ir.ui.view" id="tbl_report_sales_ete_detail_tree">
+        <field name="name">tbl_report_sales_ete_detail.tree</field>
+        <field name="model">tbl_report_sales_ete_detail</field>
+        <field name="arch" type="xml">
+            <tree string="Accounting" >
+                     <field name="name"/>
+                   <field name="warehouse_id"/>
+                <field name="tipe_barang"/>
+                <field name="scheduled_date"/>
+                <field name="date_done"/>
+                       <field name="team_id"/>
+                       <field name="user_id"/>
+                      <field name="partner_id"/>
+                      <field name="date_order"/>
+                      <field name="confirmation_date"/>
+                      <field name="categ_id"/>
+                       <!-- <field name="barcode"/> -->
+                       <field name="order_qty"/>
+                      <field name="uom_id"/>
+                      <field name="partner_ids"/>
+                      <!-- <field name="location_dest_id"/> -->
+                      <field name="tipe_cust"/>
+                       <field name="provinsi"/>
+                       <field name="kabupaten_kota"/>
+                      <field name="kecamatan"/>
+                      <field name="mobile"/>
+                      <field name="payment_term_id"/>
+                       <field name="pricelist_id"/>
+                       <field name="incoterm_id"/>
+                      <field name="currency_id"/>
+                      <field name="qty_delivered"/>
+                      <field name="open_qty"/>
+                       <field name="do_number"/>
+                       <field name="location_id"/>
+                      <field name="product_uom_qty"/>
+                      <field name="product_uom"/>
+                      <field name="date_dones"/>
+                       <field name="plat_id"/>
+                       <field name="driver_id"/>
+                      <field name="plat_idso"/>
+                      <field name="driver_idso"/>
+                      <field name="price_unit"/>
+                       <field name="amount_total"/>
+                       <field name="number"/>
+                      <field name="product_id"/>
+                      <field name="date_invoice"/>
+                      <field name="date_due"/>
+                      <field name="price_unitinv"/>
+                      <field name="amount_totalinv"/>
+                      <field name="amount_totaltax"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_sales_ete_detail">
+        <field name="name">Sales End to End Detail</field> 
+        <field name="res_model">tbl_report_sales_ete_detail</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot,tree</field>
+    </record>
+
+    <!-- <menuitem  name="Sales End to End Detail" id="sales_ete_detail" action="action_sales_ete_detail" parent="menu_sales_ete" sequence="20" /> -->
+
+    </data>
+</odoo>

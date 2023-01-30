@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record model="ir.ui.view" id="tbl_report_purchase_form">
+        <field name="name">tbl_report_purchase.form</field>
+        <field name="model">tbl_report_purchase</field>
+        <field name="arch" type="xml">
+            <form string="Teknisi">
+              <header>
+                  <button name="act_pr" string="Get PR" type="object" class="oe_highlight"/>
+                  <button name="act_po" string="Get PO" type="object" class="oe_highlight"/>
+                  <button name="act_get_data" string="Get Data" type="object" class="oe_highlight"/>
+                  <button name="print_xls_report" string="Print XLS" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+
+                 <group>
+                    <group>
+                      <field name="tgl_awal"/>
+            	      
+		            </group>
+		            <group>
+                        <field name="tgl_akhir"/>
+                <field name="data" filename="name"/>
+                    </group>
+	             </group>
+
+		        <field name="detail">
+                    <tree string="Detail Action" create="false" edit="false">
+
+                       <field name="name"/>
+                       <field name="product_id"/>
+                       <field name="desc"/>
+                       <field name="product_qty"/>
+                       <field name="product_uom_id"/>
+                       <field name="analytic_account_id"/>
+                       <field name="date_required"/>
+                       <field name="estimated_cost"/>
+                       <field name="currency_id" invisible="1"/>
+                       <field name="po_id"/>
+                       <!-- <field name="type_po"/> -->
+                       <field name="warehouse_id"/>
+                       <field name="supplier_id"/>
+                       <field name="product_qty_po"/>
+                       <field name="price_unit"/>
+                       <field name="amount_total"/>
+                       <field name="date_order"/>
+                       <field name="state"/>
+                       <field name="picking_type_id"/>
+                       <field name="analytic_account_po_id"/>
+                       <field name="currency_po"/>
+                       <field name="date_planned"/>
+                       <field name="receipt_number"/>
+                       <field name="qty_done"/>
+                       <field name="number"/>
+                       <field name="bill_date"/>
+                       <field name="currency_inv"/>
+                       <field name="quantity"/>
+                       <field name="price_unitinv"/>
+                       <field name="amount_totalinv"/>
+                       <field name="amount_totaltax"/>
+                       <field name="user_id"/>
+			        </tree>
+	            </field>
+		        <field name="detail1" invisible="1">
+                    <tree string="Detail Action" editable="bottom">
+
+                       <field name="name"/>
+                       <field name="prline_no"/>
+                       <field name="product_id"/>
+                       <field name="desc"/>
+                       <field name="product_qty"/>
+                       <field name="product_uom_id"/>
+                       <field name="analytic_account_id"/>
+                       <field name="date_required"/>
+                       <field name="estimated_cost"/>
+                       <field name="currency_id" invisible="1"/>
+			        </tree>
+	            </field>
+		        <field name="detail2" invisible="1">
+                    <tree string="Detail Action" editable="bottom">
+
+                       <field name="name"/>
+                       <field name="prline_no"/>
+                       <field name="product_id"/>
+                       <field name="desc"/>
+                       <field name="product_qty"/>
+                       <field name="product_uom_id"/>
+                       <field name="analytic_account_id"/>
+                       <field name="date_required"/>
+                       <field name="estimated_cost"/>
+                       <field name="currency_id" invisible="1"/>
+                       <field name="po_id"/>
+                       <field name="poline_id"/>
+                       <field name="type_po"/>
+                       <field name="warehouse_id"/>
+                       <field name="supplier_id"/>
+                       <field name="product_qty_po"/>
+                       <field name="price_unit"/>
+                       <field name="amount_total"/>
+                       <field name="date_order"/>
+                       <field name="state"/>
+                       <field name="picking_type_id"/>
+                       <field name="analytic_account_po_id"/>
+                       <field name="currency_po"/>
+                       <field name="date_planned"/>
+			        </tree>
+	            </field>
+	      </sheet>
+	    </form>
+	  </field>
+	</record>
+
+
+     <record model="ir.ui.view" id="tbl_report_purchase_tree">
+        <field name="name">tbl_report_purchase.tree</field>
+        <field name="model">tbl_report_purchase</field>
+        <field name="arch" type="xml">
+            <tree string="Accounting" >
+                <field name="tgl_awal"/>
+                <field name="tgl_akhir"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="action_purchase">
+        <field name="name">Purchase Proses</field> 
+        <field name="res_model">tbl_report_purchase</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem  name="Purchase Proses" id="purchase" action="action_purchase" parent="menu_purchase_ats" sequence="10" />
+
+        <record model="ir.ui.view" id="tbl_report_purchase_detail_pivot">
+            <field name="name">tbl_report_purchase_detail.pivot</field>
+            <field name="model">tbl_report_purchase_detail</field>
+            <field name="arch" type="xml">
+                <pivot string="Sales Orders">
+                    <!-- <field name="date_order" type="row"/>
+                    <field name="amount_total" type="measure"/> -->
+                </pivot>
+            </field>
+        </record>
+
+     <record model="ir.ui.view" id="tbl_report_purchase_detail_tree">
+        <field name="name">tbl_report_purchase_detail.tree</field>
+        <field name="model">tbl_report_purchase_detail</field>
+        <field name="arch" type="xml">
+            <tree string="Accounting" >
+
+                       <field name="name"/>
+                       <field name="product_id"/>
+                       <field name="desc"/>
+                       <field name="product_qty"/>
+                       <field name="product_uom_id"/>
+                       <field name="analytic_account_id"/>
+                       <field name="date_required"/>
+                       <field name="estimated_cost"/>
+                       <field name="currency_id" invisible="1"/>
+                       <field name="po_id"/>
+                       <!-- <field name="type_po"/> -->
+                       <field name="warehouse_id"/>
+                       <field name="supplier_id"/>
+                       <field name="product_qty_po"/>
+                       <field name="price_unit"/>
+                       <field name="amount_total"/>
+                       <field name="date_order"/>
+                       <field name="state"/>
+                       <field name="picking_type_id"/>
+                       <field name="analytic_account_po_id"/>
+                       <field name="currency_po"/>
+                       <field name="date_planned"/>
+                       <field name="receipt_number"/>
+                       <field name="qty_done"/>
+                       <field name="number"/>
+                       <field name="bill_date"/>
+                       <field name="currency_inv"/>
+                       <field name="quantity"/>
+                       <field name="price_unitinv"/>
+                       <field name="amount_totalinv"/>
+                       <field name="amount_totaltax"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_purchase_detail">
+        <field name="name">Purchase Detail</field> 
+        <field name="res_model">tbl_report_purchase_detail</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">pivot,tree</field>
+    </record>
+
+    <!-- <menuitem  name="Purchase Detail" id="purchase_detail" action="action_purchase_detail" parent="menu_purchase_ats" sequence="20" /> -->
+    </data>
+</odoo>

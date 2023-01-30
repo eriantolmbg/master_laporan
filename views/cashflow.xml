@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="tbl_cashflow_form">
+        <field name="name">tbl_cashflow.form</field>
+        <field name="model">tbl_cashflow</field>
+        <field name="arch" type="xml">
+            <form string="Form Peminjaman">
+                <header>
+                    <button name="action_get" string="Get Template" type="object" states="draft"/>
+                    <button name="action_hitung" string="Proses" type="object" states="get"/>
+                    <button name="action_calculate" string="Calculate" type="object" states="calculate"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+
+                </header>
+                <sheet>
+		<div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                	<group>
+                		<group string='Main'>
+		                        <field name="tgl_awal1"/>
+		                        <field name="tgl_akhir1"/>
+		                </group>
+                		<group string='Pembanding'>
+		                        <field name="tgl_awal2"/>
+		                        <field name="tgl_akhir2"/>
+
+		                </group>
+		         </group>
+
+
+	           <notebook>
+                        <page string="Detail">
+			    <field name="detail">
+		            	<tree string="Detail" editable="bottom" create='false' edit='false'>
+		            		<field name="name"/>
+		                	<field name="nominal_v11" invisible="1"/>
+		                	<field name="nominal_v12" invisible="1"/>
+		                	<field name="nominal"/>
+		                	<field name="nominal_v21" invisible="1"/>
+		                	<field name="nominal_v22" invisible="1"/>
+		                	<field name="nominal2"/>
+		                </tree>
+		            </field>
+                        </page>
+	           </notebook>
+		</sheet>
+			</form>
+		</field>
+	</record>
+
+
+
+    <record model="ir.actions.act_window" id="action_menu_cashflow">
+        <field name="name">Cash Flow</field> 
+        <field name="res_model">tbl_cashflow</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem name="Cash Flow" id="menu_cashfow_left" parent="menu_cashflow_reports1" action="action_menu_cashflow" sequence="10"/>
+
+     <record model="ir.ui.view" id="tbl_cashflow_template_tree">
+        <field name="name">tbl_cashflow_template.tree</field>
+        <field name="model">tbl_cashflow_template</field>
+        <field name="arch" type="xml">
+            <tree string="Assets" >
+                <field name="name"/>
+		
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="tbl_cashflow_template_form">
+        <field name="name">tbl_cashflow_template.form</field>
+        <field name="model">tbl_cashflow_template</field>
+        <field name="arch" type="xml">
+            <form string="Template">
+                <sheet>
+		<div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+
+
+	           <notebook>
+                        <page string="Detail">
+			    <field name="detail">
+		            	<tree string="Detail" editable="bottom">
+		            		<field name="baris"/>
+		            		<field name="name"/>
+		                	<field name="nominal"/>
+		                </tree>
+		            </field>
+                        </page>
+	           </notebook>
+		</sheet>
+			</form>
+		</field>
+	</record>
+
+
+
+    <record model="ir.actions.act_window" id="action_menu_cashflow_template">
+        <field name="name">Cash Flow Template</field> 
+        <field name="res_model">tbl_cashflow_template</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Cash Flow Template" id="menu_cashfow_template_left" parent="menu_seting_reports1" action="action_menu_cashflow_template" sequence="10"/>
+
+    <record model="ir.ui.view" id="tbl_cashflow_parameter_form">
+        <field name="name">tbl_cashflow_parameter.form</field>
+        <field name="model">tbl_cashflow_parameter</field>
+        <field name="arch" type="xml">
+            <form string="Template">
+                <sheet>
+                         <group>
+                		<group>
+		                        <field name="name"/>
+		                        <field name="desc"/>
+		                </group>
+                		<group>
+		                        <field name="payment_type"/>
+		                        <field name="link"/>
+
+		                </group>
+		         </group>
+		</sheet>
+		</form>
+		</field>
+	</record>
+
+        <record id="tbl_cashflow_report_form" model="ir.ui.view">
+            <field name="name">tbl_cashflow_report_form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='journal_id']" position="after">
+                                <label for="cashflow_id"/>
+                    <tabel>
+                        <tr>
+
+                            <td>
+		                        <field name="cashflow_id" domain="[('link','=', True),('payment_type','=', payment_type)]" attrs="{'readonly': [('set_cashflow', '=', True)]}"/>
+                                <field name="set_cashflow" invisible="1"/>
+                            </td>
+                            <td>
+                                <button name="action_set_cashflow" string="Set Cashflow" type="object" attrs="{'invisible': [('set_cashflow', '=', True)]}"/>
+                                <button name="action_cancel_cashflow" string="Cancel Cashflow" type="object" attrs="{'invisible': [('set_cashflow', '!=', True)]}"/>
+                            </td>
+                        </tr>
+                    </tabel>
+                </xpath>
+	          </field>
+	      </record>
+
+<!--         <record id="tbl_cashflow_account_payment_invoice_form" model="ir.ui.view">
+            <field name="name">tbl_cashflow_account_payment_invoice_form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='communication']" position="after">
+                                <field name="cashflow_id" domain="[('link','=', True),('payment_type','=', payment_type)]"/>
+                </xpath>
+              </field>
+          </record> -->
+
+
+     <record model="ir.ui.view" id="tbl_cashflow_parameter_tree">
+        <field name="name">tbl_cashflow_parameter.tree</field>
+        <field name="model">tbl_cashflow_parameter</field>
+        <field name="arch" type="xml">
+            <tree string="Assets" >
+                            <field name="parent"/>
+                            <field name="name"/>
+                            <field name="desc"/>
+                            <field name="payment_type"/>
+                            <field name="link"/>
+
+		
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="tbl_cashflow_parameter_form">
+        <field name="name">tbl_cashflow_parameter.form</field>
+        <field name="model">tbl_cashflow_parameter</field>
+        <field name="arch" type="xml">
+            <form string="Template">
+                <sheet>
+                         <group>
+                		<group>
+                            <field name="parent"/>
+                            <field name="name"/>
+                            <field name="desc"/>
+                            <field name="payment_type"/>
+                            <field name="link"/>
+		                </group>
+                		<group>
+
+		                </group>
+		         </group>
+		</sheet>
+			</form>
+		</field>
+	</record>
+
+
+
+    <record model="ir.actions.act_window" id="action_menu_cashflow_parameter">
+        <field name="name">Cash Flow Parameter</field> 
+        <field name="res_model">tbl_cashflow_parameter</field> 
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Cash Flow Parameter" id="menu_cashfow_parameter_left" parent="menu_seting_reports1" action="action_menu_cashflow_parameter" sequence="20"/>
+
+
+</odoo>
